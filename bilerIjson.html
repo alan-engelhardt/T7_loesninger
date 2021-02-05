@@ -19,6 +19,7 @@
         img {
             max-width: 100px;
         }
+
     </style>
 </head>
 
@@ -35,8 +36,8 @@
         </article>
     </template>
     <script>
-        let container = document.querySelector("section");
-        let temp = document.querySelector("template");
+        const container = document.querySelector("section");
+        const temp = document.querySelector("template");
 
         async function hentdata() {
             const respons = await fetch("biler.json");
@@ -47,7 +48,7 @@
         function vis(data) {
             //løb igennem array af bil objekter
             data.forEach(bil => {
-                let klon = temp.cloneNode(true).content;
+                const klon = temp.cloneNode(true).content;
                 klon.querySelector("h2").textContent = bil.mærke;
                 klon.querySelector(".model").textContent = "Model: " + bil.model;
                 klon.querySelector(".motor").textContent = "Motor: " + bil.motor;
@@ -63,5 +64,8 @@
         }
 
         hentdata();
+
     </script>
-</body></html>
+</body>
+
+</html>

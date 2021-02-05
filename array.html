@@ -3,20 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>sangliste</title>
+    <title>Array</title>
 </head>
 
 <body>
-    <ul id="liste"></ul>
-</body>
-<script>
-    const titler = ["Lærkerede", "Solen", "Lille sky", "Flyvemaskine", "Ole lukøje"];
+    <h1>Playliste</h1>
 
-    titler.forEach(sang=>{
-        const li = document.createElement("li");
-        li.textContent = sang;
-        liste.appendChild(li);
-    });
-</script>
+    <ul id="display"></ul>
 
-</html>
+    <script>
+        const playliste = ["Two of Us", "Dig a Pony", "Across the Universe", "I Me Mine", "Dig It", "Let It Be", "Maggie Mae", "I've Got a Feeling"];
+
+        playliste.forEach(nummer => display.innerHTML += "<li>" + nummer + "</li>");
+    </script>
+</body></html>
