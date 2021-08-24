@@ -18,16 +18,11 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         grid-gap: 20px;
-        /*
-            display: flex;
-            flex-wrap: wrap;
-*/
       }
 
       article {
-        /*           flex-basis: 50%;*/
         border: 1px solid #333;
-        transition: all 1s;
+        transition: all 0.1s;
       }
 
       .the_shadow {
@@ -61,7 +56,7 @@
     <main>
       <h2>Undertitel</h2>
       <section>
-        <article class="the_shadow">
+        <article>
           <img src="https://placeimg.com/400/300/arch" alt="" class="first" />
           <h3>Article 1</h3>
           <p>
@@ -71,7 +66,7 @@
             rerum laborum.
           </p>
         </article>
-        <article class="the_shadow">
+        <article>
           <img src="https://placeimg.com/400/300/any" alt="" />
           <h3>Article 2</h3>
           <p>
@@ -104,7 +99,6 @@
         img1.alt = "Caprice 30 - Maude";
 
         let newArticle = document.createElement("article");
-        newArticle.classList.add("the_shadow");
         let newH3 = document.createElement("h3");
         let newHeadlineText = document.createTextNode("Mennesker");
         newH3.appendChild(newHeadlineText);
@@ -119,6 +113,7 @@
 
         img1.addEventListener("click", skiftBillede);
 
+        /*
         document
           .querySelector("article:nth-child(1)")
           .addEventListener("mouseover", theMouseOver);
@@ -137,16 +132,23 @@
         document
           .querySelector("article:nth-child(3)")
           .addEventListener("mouseout", theMouseOut);
+          .addEventListener("mouseover", theMouseOver);
+*/
+
+        document.querySelectorAll("article").forEach((article) => {
+          article.addEventListener("mouseover", theMouseOver);
+          article.addEventListener("mouseout", theMouseOut);
+        });
       }
 
       function theMouseOver(obj) {
         console.log("HEY", this);
-        this.classList.toggle("the_shadow");
+        this.classList.add("the_shadow");
       }
 
       function theMouseOut() {
         console.log("HEY", this);
-        this.classList.toggle("the_shadow");
+        this.classList.remove("the_shadow");
       }
 
       function skiftBillede() {
