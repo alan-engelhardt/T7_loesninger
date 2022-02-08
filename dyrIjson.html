@@ -1,61 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>JSON</title>
     <style>
-        article {
-            border: 1px solid #333;
-            padding: 10px;
-            margin: 1em;
-        }
+      article {
+        border: 1px solid #333;
+        padding: 1em;
+        margin: 1em;
+        text-align: center;
+      }
 
-        img {
-            max-width: 100px;
-        }
-
+      img {
+        max-width: 100px;
+      }
+      section {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 1fr;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <section></section>
-
-    <template>
+  <body>
+    <section>
+      <template>
         <article>
-            <h2></h2>
-            <img src="" alt="">
-            <p class="art"></p>
-            <p class="sted"></p>
+          <h2></h2>
+          <img src="" alt="" />
+          <p class="email"></p>
+          <p class="sted"></p>
         </article>
-    </template>
+      </template>
+    </section>
+
     <script>
-        const container = document.querySelector("section");
-        const temp = document.querySelector("template");
+      const container = document.querySelector("section");
+      const temp = document.querySelector("template");
 
-        const fil = "alleDyr.json";
+      const fil = "alleDyr.json";
+      const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+      const key = "600fe9211346a1524ff12e31";
+      let data = [];
 
-        async function hentdata() {
-            const respons = await fetch(fil);
-            const json = await respons.json();
-            vis(json);
-        }
+      const options = {
+        headers: {
+          "x-apikey": key,
+        },
+      };
 
-        function vis(dyr) {
-            //løb igennem array "dyr"
-            dyr.forEach(etDyr => {
-                const klon = temp.cloneNode(true).content;
-                klon.querySelector("h2").textContent = etDyr.navn;
-                klon.querySelector(".art").textContent = "Type: " + etDyr.type;
-                klon.querySelector(".sted").textContent = "Levested: " + etDyr.levested;
-                klon.querySelector("img").src = etDyr.billede;
-                container.appendChild(klon);
-            })
-        }
+      async function hentdata() {
+        const respons = await fetch(url, options);
+        const json = await respons.json();
+        vis(json);
+      }
 
-        hentdata();
+      function vis(json) {
+        //løb igennem array med personer
+        json.forEach((person) => {
+          const klon = temp.cloneNode(true).content;
+          klon.querySelector("h2").textContent = person.fornavn;
+          klon.querySelector(".email").textContent = person.email;
+          container.appendChild(klon);
+        });
+      }
 
+      hentdata();
     </script>
-</body>
-
+  </body>
 </html>
